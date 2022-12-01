@@ -15,6 +15,9 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("org.springframework:spring-aop")
+	implementation("org.aspectj:aspectjweaver")
+	implementation("org.jetbrains:annotations:20.1.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
