@@ -22,15 +22,11 @@ public class Day11 implements Puzzle {
         long operate(long old);
     }
 
-    private interface Test {
-        boolean test(long worry);
-    }
-
     private static class Monkey {
         private long inspectionCount = 0;
         Deque<Long> items;
         Operation inspection;
-        Test test;
+        long divisor;
         int positiveMonkeyIndex;
         int negativeMonkeyIndex;
     }
@@ -45,6 +41,9 @@ public class Day11 implements Puzzle {
 
     private Long calculateMonkeyBusiness(String input, int rounds, boolean divideWorry) {
         var monkeys = parseMonkeys(input);
+        var groupMod = monkeys.stream()
+                .mapToLong(monkey -> monkey.divisor)
+                .reduce(1L, (a, b) -> a * b);
         for (int round = 0; round < rounds; round++) {
             if (isPrintedRound(round)) {
                 System.out.printf("After round %d of %d%n", round, rounds);
@@ -61,7 +60,8 @@ public class Day11 implements Puzzle {
                     if (divideWorry) {
                         newWorry = newWorry / 3;
                     }
-                    if (monkey.test.test(newWorry)) {
+                    newWorry = newWorry % groupMod;
+                    if (newWorry % monkey.divisor == 0L) {
                         monkeys.get(monkey.positiveMonkeyIndex).items.addLast(newWorry);
                     } else {
                         monkeys.get(monkey.negativeMonkeyIndex).items.addLast(newWorry);
@@ -118,8 +118,7 @@ public class Day11 implements Puzzle {
                 }
                 var testMatch = testPattern.matcher(line);
                 if (testMatch.find()) {
-                    var value = Long.parseLong(testMatch.group(1));
-                    monkey.test = worry -> worry % value == 0L;
+                    monkey.divisor = Long.parseLong(testMatch.group(1));
                     continue;
                 }
                 var optionMatch = optionPattern.matcher(line);
