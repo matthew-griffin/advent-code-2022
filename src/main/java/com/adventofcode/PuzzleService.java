@@ -26,6 +26,7 @@ public class PuzzleService {
         puzzles.put(new PuzzleDate(2022, 11), new Day11());
         puzzles.put(new PuzzleDate(2022, 12), new Day12());
         puzzles.put(new PuzzleDate(2022, 13), new Day13());
+        puzzles.put(new PuzzleDate(2022, 14), new Day14());
     }
 
     Collection<PuzzleDate> getPuzzles() {
