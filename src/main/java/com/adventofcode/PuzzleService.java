@@ -10,6 +10,8 @@ import java.util.Map;
 @Service
 public class PuzzleService {
     private final Map<PuzzleDate, Puzzle> puzzles = new HashMap<>();
+    private static final int DAY_15_ROW_OF_INTEREST = 2000000;
+    private static final int DAY_15_SEARCH_MAX = 4000000;
 
     PuzzleService() {
         puzzles.put(new PuzzleDate(2021, 1), new com.adventofcode.year2021.Day1());
@@ -27,6 +29,7 @@ public class PuzzleService {
         puzzles.put(new PuzzleDate(2022, 12), new Day12());
         puzzles.put(new PuzzleDate(2022, 13), new Day13());
         puzzles.put(new PuzzleDate(2022, 14), new Day14());
+        puzzles.put(new PuzzleDate(2022, 15), new Day15(DAY_15_ROW_OF_INTEREST, DAY_15_SEARCH_MAX));
     }
 
     Collection<PuzzleDate> getPuzzles() {
