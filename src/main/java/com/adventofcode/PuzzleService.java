@@ -30,6 +30,7 @@ public class PuzzleService {
         puzzles.put(new PuzzleDate(2022, 13), new Day13());
         puzzles.put(new PuzzleDate(2022, 14), new Day14());
         puzzles.put(new PuzzleDate(2022, 15), new Day15(DAY_15_ROW_OF_INTEREST, DAY_15_SEARCH_MAX));
+        puzzles.put(new PuzzleDate(2022, 16), new Day16());
     }
 
     Collection<PuzzleDate> getPuzzles() {
