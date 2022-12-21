@@ -2,6 +2,7 @@ package com.adventofcode.year2022;
 
 import com.adventofcode.Puzzle;
 import com.adventofcode.PuzzleResult;
+import lombok.RequiredArgsConstructor;
 
 public class Day4 implements Puzzle {
     public enum Overlap {
@@ -10,14 +11,15 @@ public class Day4 implements Puzzle {
         FULL
     }
 
+    @RequiredArgsConstructor
     public static class Range
     {
         private final int min;
         private final int max;
 
-        private Range(int min, int max) {
-            this.min = min;
-            this.max = max;
+        private static Range createRange(String inputRange) {
+            var range = inputRange.split("-");
+            return new Range(Integer.parseInt(range[0]), Integer.parseInt(range[1]));
         }
 
         public Overlap getOverlap(Range other) {
@@ -42,8 +44,8 @@ public class Day4 implements Puzzle {
         var inputLines = inputText.split("\n");
         for (var line: inputLines) {
             var sections = line.split(",");
-            var range1 = createRange(sections[0]);
-            var range2 = createRange(sections[1]);
+            var range1 = Range.createRange(sections[0]);
+            var range2 = Range.createRange(sections[1]);
             var overlap = range1.getOverlap(range2);
             if (overlap == Overlap.PARTIAL) {
                 partTwo++;
@@ -54,10 +56,5 @@ public class Day4 implements Puzzle {
 
         }
         return new PuzzleResult(Integer.toString(partOne), Integer.toString(partTwo));
-    }
-
-    private Range createRange(String inputRange) {
-        var range = inputRange.split("-");
-        return new Range(Integer.parseInt(range[0]), Integer.parseInt(range[1]));
     }
 }
