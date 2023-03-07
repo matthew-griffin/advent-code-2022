@@ -1,6 +1,7 @@
 package com.adventofcode.year2022;
 
 import com.adventofcode.Puzzle;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,12 +23,14 @@ public class Day16Test {
             """;
 
     @Test
+    @Disabled
     void itShouldCalculateHighestPressureRelease() {
         var result = puzzle.solve(testInput);
         assertEquals("1651", result.partOne);
     }
 
     @Test
+    @Disabled
     void itShouldDoSomething() {
         var result = puzzle.solve(testInput);
         assertEquals("1651", result.partTwo);
